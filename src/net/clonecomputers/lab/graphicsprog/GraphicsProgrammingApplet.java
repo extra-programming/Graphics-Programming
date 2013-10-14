@@ -16,9 +16,6 @@ public class GraphicsProgrammingApplet extends JApplet {
 		this.add(panels[1]);
 	}
 	
-	@Override public void start(){
-	}
-	
 	public static JPanel[] getPanels(int w, int h){
 		final DrawGrid d = new DrawGrid(w,h);
 		String name = JOptionPane.showInputDialog(
