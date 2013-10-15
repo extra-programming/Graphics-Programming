@@ -31,13 +31,13 @@ public class DoNothingDrawer extends AbstractDrawer {
 	}
 
 	@Override
-	public void drawCrossHair(double x, double y) {
-		drawCrossHair(x,y,Color.BLUE);
+	public void drawCrossHair(double x, double y, double radius, double hole) {
+		drawCrossHair(x,y,radius,hole,Color.BLUE);
 	}
 
 	@Override
-	public void drawCrossHair(double x, double y, Color c) {
-		show("drawCrossHair",x,y,c);
+	public void drawCrossHair(double x, double y, double radius, double hole, Color c) {
+		show("drawCrossHair",x,y,radius,hole,c);
 	}
 
 	@Override

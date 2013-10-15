@@ -21,8 +21,9 @@ public abstract class AbstractDrawer {
 		dg.background(c);
 	}
 	
-	public abstract void drawCrossHair(double x, double y);
-	public abstract void drawCrossHair(double x, double y, Color c);
+	public abstract void drawCrossHair(double x, double y, double radius, double hole);
+	public abstract void drawCrossHair(double x, double y, double radius,
+			double hole, Color c);
 	
 	public abstract void drawCircle(double ctrX, double ctrY, double radius);
 	public abstract void drawCircle(double ctrX, double ctrY, double radius, Color c);
@@ -126,9 +127,9 @@ public abstract class AbstractDrawer {
 	    drawLine  ( 0,30,  30,0,  Color.blue ) ;
 	    drawLine  ( 30,0,  0,-30,  Color.yellow ) ;
 	    drawLine  ( -29,-1,  0,-30,  Color.green ) ;
-	    drawCrossHair  ( -10,0 ) ;
-	    drawCrossHair  ( 0,10 ) ;
-	    drawCrossHair  ( 10,0 ) ;
+	    drawCrossHair  ( -10,0, 5,2 ) ;
+	    drawCrossHair  ( 0,10, 8,3 ) ;
+	    drawCrossHair  ( 10,0, 5,1 ) ;
 	    drawCircle  ( 0,-10,  8, Color.blue ) ;
 	    drawCircle  ( 0,-10,  6 ) ;
 	    drawCircle  ( 0,-10,  4 ) ;

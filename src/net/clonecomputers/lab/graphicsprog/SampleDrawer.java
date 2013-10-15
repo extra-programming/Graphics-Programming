@@ -50,15 +50,17 @@ public class SampleDrawer extends AbstractDrawer {
 
 
 	@Override
-	public void drawCrossHair(double x, double y) {
-		// TODO Auto-generated method stub
-
+	public void drawCrossHair(double x, double y, double radius, double hole) {
+		drawCrossHair(x,y,radius,hole,Color.BLACK);
 	}
 
 	@Override
-	public void drawCrossHair(double x, double y, Color c) {
-		// TODO Auto-generated method stub
-
+	public void drawCrossHair(double x, double y,
+			double radius, double hole, Color c) {
+		drawLine(x+hole,y,x+radius,y, c);
+		drawLine(x-radius,y,x-hole,y, c);
+		drawLine(x,y+hole,x,y+radius, c);
+		drawLine(x,y-radius,x,y-hole, c);
 	}
 
 	@Override
