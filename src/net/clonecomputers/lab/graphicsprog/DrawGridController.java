@@ -144,6 +144,14 @@ public class DrawGridController extends JPanel {
 		if(s.equalsIgnoreCase("RED") || s.equalsIgnoreCase("r")) return Color.RED;
 		if(s.equalsIgnoreCase("WHITE") || s.equalsIgnoreCase("w")) return Color.WHITE;
 		if(s.equalsIgnoreCase("YELLOW") || s.equalsIgnoreCase("y")) return Color.YELLOW;
+		String[] sa = s.split(":");
+		if(sa.length == 3) {
+			return new Color(
+				Integer.parseInt(sa[0]),
+				Integer.parseInt(sa[1]),
+				Integer.parseInt(sa[2])
+			);
+		}
 		return Color.BLUE;
 	}
 }
