@@ -75,13 +75,13 @@ public class DoNothingDrawer extends AbstractDrawer {
 	}
 
 	@Override
-	public void drawPyramid(double x, double y) {
-		show("drawPyramid",x,y);
+	public void drawCube(double x1, double y1, double radius) {
+		show("drawCube",x1,y1,radius);
 	}
 
 	@Override
-	public void drawCube(double x1, double y1, double x2, double y2) {
-		show("drawCube",x1,y1,x2,y2);
+	public void drawRect(double x1, double y1, double x2, double y2) {
+		show("drawRect",x1,y1,x2,y2);
 	}
 	
 	private void show(String s, Object... args){

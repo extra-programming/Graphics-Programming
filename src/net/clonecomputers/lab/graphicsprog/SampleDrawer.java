@@ -37,7 +37,9 @@ public class SampleDrawer extends AbstractDrawer {
 		}
 		double m = dy/dx;
 		double b = y1 - m*x1;
-		for(double x = min(x1,x2); x <= max(x1, x2); x++){
+		double max = max(x1,x2);
+		double min = min(x1,x2);
+		for(double x = min; x <= max; x++){
 			if(mirror) drawDot(m*x+b,x,c);
 			else drawDot(x,m*x+b,c);
 		}
@@ -109,7 +111,7 @@ public class SampleDrawer extends AbstractDrawer {
 	}
 
 	private double max(double... args) {
-		double max = Double.MIN_VALUE;
+		double max = -Double.MAX_VALUE;
 		for(double d: args) if(d > max) max = d;
 		return max;
 	}
@@ -133,15 +135,46 @@ public class SampleDrawer extends AbstractDrawer {
 	}
 
 	@Override
-	public void drawPyramid(double x, double y) {
-		// TODO Auto-generated method stub
-
+	public void drawCube(double x, double y, double r) {
+		drawCube(x, y, r, .8, PI/6);
+	}
+	
+	public void drawCube(double x, double y, double r, double scale, double angle){
+		double s = scale; // perspective scalefactor
+		double a = angle; // angle
+		double x1=x+r,x2=x-r,y1=y+r,y2=y-r;
+		double x3=x+r*(2*cos(a)+1)*s,x4=x+r*(2*cos(a)-1)*s,y3=y+r*(2*sin(a)+1)*s,y4=y+r*(2*sin(a)-1)*s;
+		drawRect(x1,y1,x2,y2);
+		drawRect(x3,y3,x4,y4);
+		drawLine(x1,y1,x3,y3);
+		drawLine(x2,y2,x4,y4);
+		drawLine(x1,y2,x3,y4);
+		drawLine(x2,y1,x4,y3);
+	}
+	
+	public void fillQuadralateral(double x1, double y1, double x2, double y2,
+								  double x3, double y3, double x4, double y4, Color c) {
+		fillTriangle(x1,y1,x2,y2,x3,y3, c);
+		fillTriangle(x1,y1,x4,y4,x3,y3, c);
+	}
+	
+	public void fillCube(double x, double y, double r, double scale, double angle){
+		double s = scale; // perspective scalefactor
+		double a = angle; // angle
+		double x1=x+r,x2=x-r,y1=y+r,y2=y-r;
+		double x3=x+r*(2*cos(a)+1)*s,x4=x+r*(2*cos(a)-1)*s,y3=y+r*(2*sin(a)+1)*s,y4=y+r*(2*sin(a)-1)*s;
+		
+		fillQuadralateral(x1, y1, x1, y2, x2, y2, x2, y1, Color.RED);
+		fillQuadralateral(x1, y1, x3, y3, x4, y3, x2, y1, Color.GREEN);
+		fillQuadralateral(x1, y1, x3, y3, x3, y4, x1, y2, Color.BLUE);
 	}
 
 	@Override
-	public void drawCube(double x1, double y1, double x2, double y2) {
-		// TODO Auto-generated method stub
-
+	public void drawRect(double x1, double y1, double x2, double y2) {
+		drawLine(x1,y1,x2,y1);
+		drawLine(x1,y1,x1,y2);
+		drawLine(x1,y2,x2,y2);
+		drawLine(x2,y1,x2,y2);
 	}
 
 }

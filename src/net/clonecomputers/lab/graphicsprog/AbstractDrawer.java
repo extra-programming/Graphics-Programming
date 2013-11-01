@@ -41,8 +41,9 @@ public abstract class AbstractDrawer {
 	public abstract void fillTriangleDown(double leftX,double rightX,
 			double leftY,double botX, double botY);
 	
-	public abstract void drawPyramid(double x, double y);
-	public abstract void drawCube(double x1, double y1, double x2, double y2);
+	public abstract void drawRect(double x1, double y1, double x2, double y2);
+	
+	public abstract void drawCube(double x1, double y1, double radius);
 	
 	
 	public void testlines2d( double x, double y ) {
@@ -120,8 +121,7 @@ public abstract class AbstractDrawer {
 	    drawDot(-27,-27,Color.green);
 	    
 	    
-	    drawPyramid  ( 0,0 ) ;
-	    drawCube  ( 0,0, 10,10 ) ;
+	    drawCube  ( 0,0, 10 ) ;
 	    drawCircle  ( 0,0,20 ) ;
 	    drawLine  ( -30,0,  0,30,  Color.red ) ;
 	    drawLine  ( 0,30,  30,0,  Color.blue ) ;

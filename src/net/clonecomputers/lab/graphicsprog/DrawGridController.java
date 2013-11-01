@@ -2,6 +2,8 @@ package net.clonecomputers.lab.graphicsprog;
 
 import javax.swing.*;
 
+import org.mbertoli.jfep.*;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.lang.reflect.*;
@@ -25,6 +27,7 @@ public class DrawGridController extends JPanel {
 		List<JButton> buttons = new LinkedList<JButton>();
 		for(int i = 0; i < api.length; i++){
 			if(!AbstractDrawer.class.isAssignableFrom(api[i].getDeclaringClass())) continue;
+			if(!Modifier.isPublic(api[i].getModifiers())) continue;
 			JButton b = new JButton(name(api[i]));
 			b.addActionListener(new DrawButtonListener(api[i]));
 			buttons.add(b);
@@ -61,11 +64,14 @@ public class DrawGridController extends JPanel {
 			try{
 			for(int i = 0; i < params.length; i++){
 				if(paramTypes[i].equals(int.class)){
-					params[i] = Integer.parseInt(stringParams[i]);
+					//params[i] = Integer.parseInt(stringParams[i]);
+					params[i] = (int)new Parser("round("+stringParams[i]+")").getValue();
 				}else if(paramTypes[i].equals(double.class)){
-					params[i] = Double.parseDouble(stringParams[i]);
+					params[i] = new Parser(stringParams[i]).getValue();
 				}else if(paramTypes[i].equals(Color.class)){
 					params[i] = getColor(stringParams[i]);
+				}else if(paramTypes[i].equals(boolean.class)){
+					params[i] = getBool(stringParams[i]);
 				}else{
 					params[i] = null;
 				}
@@ -73,6 +79,10 @@ public class DrawGridController extends JPanel {
 			}catch(NumberFormatException e1){
 				JOptionPane.showMessageDialog(DrawGridController.this,
 						"Wrong type of argument",
+						"Error", JOptionPane.OK_OPTION);
+			}catch(ParseError e1){
+				JOptionPane.showMessageDialog(DrawGridController.this,
+						"Error parsing argument",
 						"Error", JOptionPane.OK_OPTION);
 			}
 			}else{
@@ -103,7 +113,7 @@ public class DrawGridController extends JPanel {
 		if(s == null) return null;
 		return s.split(",");
 	}
-	
+
 	public String object(Method m){
 		return m.getDeclaringClass().getSimpleName();
 	}
@@ -153,5 +163,14 @@ public class DrawGridController extends JPanel {
 			);
 		}
 		return Color.BLUE;
+	}
+	
+	public boolean getBool(String s) {
+		return (
+			s.equalsIgnoreCase("t") ||
+			s.equalsIgnoreCase("true") ||
+			s.equalsIgnoreCase("y") ||
+			s.equalsIgnoreCase("yes")
+		); // if not true, then false
 	}
 }
