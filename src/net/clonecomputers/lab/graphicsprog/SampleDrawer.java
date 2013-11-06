@@ -110,13 +110,13 @@ public class SampleDrawer extends AbstractDrawer {
 		drawLine(x1,y1,x2,y2,c);
 	}
 
-	private double max(double... args) {
+	private static double max(double... args) {
 		double max = -Double.MAX_VALUE;
 		for(double d: args) if(d > max) max = d;
 		return max;
 	}
 
-	private double min(double... args) {
+	private static double min(double... args) {
 		double min = Double.MAX_VALUE;
 		for(double d: args) if(d < min) min = d;
 		return min;

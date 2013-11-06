@@ -84,13 +84,13 @@ public class DoNothingDrawer extends AbstractDrawer {
 		show("drawRect",x1,y1,x2,y2);
 	}
 	
-	private void show(String s, Object... args){
+	private static void show(String s, Object... args){
 		JOptionPane.showMessageDialog(null,
 				s+str(args),
 				s, JOptionPane.OK_OPTION);
 	}
 	
-	private String str(Object... args){
+	private static String str(Object... args){
 		StringBuilder s = new StringBuilder("(");
 		for(Object o: args){
 			s.append(o.toString());
