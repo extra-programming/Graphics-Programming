@@ -19,7 +19,7 @@ public class GraphicsProgrammingApplet extends JApplet {
 	public static JPanel[] getPanels(int w, int h){
 		final DrawGrid d = new DrawGrid(w,h);
 		String name = JOptionPane.showInputDialog(
-				"Input class name for drawer type", "SampleDrawer");
+				"Input class name for drawer type", "Drawer");
 		Class<?> cl;
 		try {
 			cl = Class.forName("net.clonecomputers.lab.graphicsprog."+name);
