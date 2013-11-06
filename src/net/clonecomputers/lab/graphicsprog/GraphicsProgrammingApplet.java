@@ -68,6 +68,10 @@ public class GraphicsProgrammingApplet extends JApplet {
 			h = 700;
 		}
 		final JPanel[] panels = getPanels(w,h);
+		if(panels == null) {
+			JOptionPane.showMessageDialog(null, "Failed to load Drawer!", "Error!", JOptionPane.ERROR_MESSAGE);
+			System.exit(0); //should we maybe exit nonzero?
+		}
 		EventQueue.invokeLater(new Runnable(){
 			@Override
 			public void run() {
