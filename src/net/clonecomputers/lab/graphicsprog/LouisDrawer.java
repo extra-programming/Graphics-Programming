@@ -8,6 +8,8 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Font;
+import java.awt.image.*;
+import java.lang.reflect.*;
 
 import javax.swing.JLabel;
 import javax.swing.event.AncestorEvent;
@@ -22,16 +24,16 @@ import javax.swing.event.AncestorListener;
 public class LouisDrawer extends AbstractDrawer {
 
 	private static final boolean SNEAKY = false; //not being sneaky!!!!!!
-	
+
 	public static final Color DEFAULT_FOREGROUND_COLOR = Color.BLACK;
-	public static final Color DEFAULT_BACKGROUND_COLOR = Color.WHITE;
-	
+	public static final Color DEFAULT_BACKGROUND_COLOR = Color.LIGHT_GRAY;
+
 	public LouisDrawer(DrawGrid dg) {
 		super(dg);
 		if(SNEAKY) {
 			dg.addAncestorListener(new AncestorListener() {
-				
-				
+
+
 				/**
 				 * The sad thing is that there is no way to prevent this really.
 				 * Even if you don't give me direct access to JFrame methods by passing me an interface I can just use Frame.getFrames() and screw around with stuff anyway.
@@ -61,7 +63,7 @@ public class LouisDrawer extends AbstractDrawer {
 				public void ancestorRemoved(AncestorEvent e) {
 					beSneaky(e.getComponent());
 				}
-				
+
 			});
 		}
 	}
@@ -101,65 +103,65 @@ public class LouisDrawer extends AbstractDrawer {
 	@Override
 	public void drawCrossHair(double x, double y, double radius, double hole) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void drawCrossHair(double x, double y, double radius, double hole, Color c) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void drawCircle(double ctrX, double ctrY, double radius) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void drawCircle(double ctrX, double ctrY, double radius, Color c) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void fillTriangle(double x1, double y1, double x2, double y2,
 			double x3, double y3) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void fillTriangle(double x1, double y1, double x2, double y2,
 			double x3, double y3, Color c) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void fillTriangleUp(double leftX, double rightX, double leftY,
 			double topX, double topY) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void fillTriangleDown(double leftX, double rightX, double leftY,
 			double botX, double botY) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void drawRect(double x1, double y1, double x2, double y2) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void drawCube(double x1, double y1, double radius) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 }
