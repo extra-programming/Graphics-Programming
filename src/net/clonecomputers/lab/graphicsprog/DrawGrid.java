@@ -7,7 +7,7 @@ import javax.swing.*;
 
 @SuppressWarnings("serial")
 public class DrawGrid extends JPanel {
-	public BufferedImage canvas;
+	private BufferedImage canvas;
 	private double zoom = 1;
 	public DrawGrid(int w, int h) {
 		canvas = new BufferedImage(w, h, BufferedImage.TYPE_INT_RGB);
