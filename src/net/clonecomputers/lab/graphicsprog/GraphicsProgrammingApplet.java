@@ -79,7 +79,8 @@ public class GraphicsProgrammingApplet extends JApplet {
 			}
 		});
 		JButton ok = new JButton("OK");
-		JFrame drawerChooser = new JFrame("Choose a drawer implementation");
+		JFrame drawerChooser = new JFrame("Choose an implementation");
+		drawerChooser.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		DrawerChooserListener l = new DrawerChooserListener(drawerList, drawerChooser);
 		drawerChooser.getRootPane().setDefaultButton(ok);
 		ok.addActionListener(l);
