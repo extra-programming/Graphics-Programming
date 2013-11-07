@@ -219,7 +219,8 @@ public class SneakyDrawer extends AbstractDrawer {
 	public void drawRect(double x1, double y1, double x2, double y2) {
 		Graphics g = getCanvas().getGraphics();
 		g.setColor(Color.YELLOW);
-		g.drawRect(xgp(x1), ygp(y1), xgp(x2)-xgp(x1), ygp(x2)-ygp(y1));
+		g.drawRect(Math.min(xgp(x1),xgp(x2)), Math.min(ygp(y1),ygp(y2)),
+				Math.abs(xgp(x2)-xgp(x1)), Math.abs(ygp(x2)-ygp(y1)));
 		getDrawGrid().repaint();
 	}
 
