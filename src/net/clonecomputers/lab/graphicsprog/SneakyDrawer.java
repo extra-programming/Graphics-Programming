@@ -174,7 +174,7 @@ public class SneakyDrawer extends AbstractDrawer {
 	public void drawCircle(double ctrX, double ctrY, double radius, Color c) {
 		Graphics g = getCanvas().getGraphics();
 		g.setColor(c);
-		g.drawOval(xgp(ctrX-radius), ygp(ctrY-radius),(int)(zoom()*2*radius), (int)(zoom()*2*radius));
+		g.drawOval(xgp(ctrX-radius), ygp(ctrY+radius),(int)(zoom()*2*radius), (int)(zoom()*2*radius));
 		getDrawGrid().repaint();
 	}
 
