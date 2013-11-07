@@ -123,7 +123,7 @@ public class SneakyDrawer extends AbstractDrawer {
 	public void drawDot(double x, double y) {
 		Graphics g = getCanvas().getGraphics();
 		g.setColor(Color.CYAN);
-		g.fillRect(xgp(x), ygp(y), (int)zoom(), (int)zoom());
+		g.fillRect(xgp(x-.5), ygp(y+.5), (int)zoom(), (int)zoom());
 		getDrawGrid().repaint();
 	}
 
