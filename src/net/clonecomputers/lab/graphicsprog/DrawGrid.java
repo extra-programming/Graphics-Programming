@@ -16,7 +16,7 @@ public class DrawGrid extends JPanel {
 		g.fillRect(0,0,w,h);
 	}
 	
-	public synchronized void point(double[] pos, Color c) {
+	public synchronized void point(Color c, double... pos) {
 		Graphics g = canvas.getGraphics();
 		g.setColor(c);
 		pos[0] = Math.round(pos[0]);
