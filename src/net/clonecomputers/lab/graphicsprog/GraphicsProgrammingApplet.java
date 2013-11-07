@@ -1,9 +1,14 @@
 package net.clonecomputers.lab.graphicsprog;
 
 import java.awt.*;
+import java.awt.event.*;
 import java.lang.reflect.*;
+import java.util.*;
 
 import javax.swing.*;
+import javax.swing.plaf.*;
+
+import net.clonecomputers.lab.util.*;
 
 @SuppressWarnings("serial")
 public class GraphicsProgrammingApplet extends JApplet {
@@ -18,7 +23,7 @@ public class GraphicsProgrammingApplet extends JApplet {
 	
 	public static JPanel[] getPanels(int w, int h){
 		final DrawGrid d = new DrawGrid(w,h);
-		String name = JOptionPane.showInputDialog(
+		/*String name = JOptionPane.showInputDialog(
 				"Input class name for drawer type", "Drawer");
 		Class<?> cl;
 		try {
@@ -49,10 +54,91 @@ public class GraphicsProgrammingApplet extends JApplet {
 		}else{
 			System.err.println("Not a drawer");
 			return null;
+		}*/
+
+		Set<Class<? extends AbstractDrawer>> drawersInPackage = ReflectionsHelper.findAllImplementations(AbstractDrawer.class);
+		Set<AbstractDrawer> drawers = new HashSet<AbstractDrawer>();
+		for(Class<? extends AbstractDrawer> a : drawersInPackage) {
+			try {
+				Constructor<? extends AbstractDrawer> constructor = a.getConstructor(DrawGrid.class);
+				AbstractDrawer newDrawer = constructor.newInstance(d);
+				drawers.add(newDrawer);
+			} catch(NoSuchMethodException e) {
+				System.err.println(a.getSimpleName() + " needs a proper constructor");
+			} catch(Exception e) {
+				System.err.println("Error initializing drawer class " + a.getSimpleName());
+				e.printStackTrace();
+			}
 		}
+		JList drawerList = new JList(drawers.toArray());
+		drawerList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		drawerList.setCellRenderer(new DefaultListCellRenderer() {
+			@Override
+			public Component getListCellRendererComponent(JList list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
+				return super.getListCellRendererComponent(list, value.getClass().getSimpleName(), index, isSelected, cellHasFocus);
+			}
+		});
+		JButton ok = new JButton("OK");
+		JFrame drawerChooser = new JFrame("Choose a drawer implementation");
+		DrawerChooserListener l = new DrawerChooserListener(drawerList, drawerChooser);
+		drawerChooser.getRootPane().setDefaultButton(ok);
+		ok.addActionListener(l);
+		drawerList.addMouseListener(l);
+		drawerChooser.addKeyListener(l);
+		Container drawerChooserPane = drawerChooser.getContentPane();
+		drawerChooserPane.setLayout(new BorderLayout());
+		drawerChooserPane.add(new JScrollPane(drawerList),BorderLayout.CENTER);
+		drawerChooserPane.add(ok,BorderLayout.PAGE_END);
+		drawerChooser.setResizable(false);
+		drawerChooser.pack();
+		drawerChooser.setVisible(true);
+		while(!l.done) Thread.yield(); 
+		AbstractDrawer drawer = l.drawer;
+		if(drawer == null) System.exit(0);
 		final DrawGridController c = new DrawGridController(d, drawer);
 		d.setPreferredSize(new Dimension(w+10,h+10));
 		return new JPanel[]{d,c};
+	}
+	
+	private static class DrawerChooserListener extends MouseAdapter implements ActionListener,KeyListener {
+		private final JList drawerList;
+		private final JFrame drawerWindow;
+		public AbstractDrawer drawer = null;
+		public boolean done = false;
+		public DrawerChooserListener(JList drawerList, JFrame drawerWindow){
+			this.drawerList = drawerList;
+			this.drawerWindow = drawerWindow;
+		}
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			drawer = (AbstractDrawer)drawerList.getSelectedValue();
+			done = true;
+			drawerWindow.dispose();
+		}
+		@Override
+		public void mouseClicked(MouseEvent e){
+			if(e.getClickCount() > 1){
+				drawer = (AbstractDrawer)drawerList.getSelectedValue();
+				done = true;
+				drawerWindow.dispose();
+			}
+		}
+		@Override
+		public void keyPressed(KeyEvent arg0) {
+			// don't care
+		}
+		@Override
+		public void keyReleased(KeyEvent arg0) {
+			// don't care
+		}
+		@Override
+		public void keyTyped(KeyEvent e) {
+			if(e.isActionKey()){
+				drawer = (AbstractDrawer)drawerList.getSelectedValue();
+				done = true;
+				drawerWindow.dispose();
+			}
+		}
 	}
 	
 	/**
