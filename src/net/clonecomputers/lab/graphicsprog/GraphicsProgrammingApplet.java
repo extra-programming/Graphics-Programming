@@ -19,7 +19,7 @@ public class GraphicsProgrammingApplet extends JApplet {
 	public static JPanel[] getPanels(int w, int h){
 		final DrawGrid d = new DrawGrid(w,h);
 		String name = JOptionPane.showInputDialog(
-				"Input class name for drawer type", "SampleDrawer");
+				"Input class name for drawer type", "Drawer");
 		Class<?> cl;
 		try {
 			cl = Class.forName("net.clonecomputers.lab.graphicsprog."+name);
@@ -68,6 +68,10 @@ public class GraphicsProgrammingApplet extends JApplet {
 			h = 700;
 		}
 		final JPanel[] panels = getPanels(w,h);
+		if(panels == null) {
+			JOptionPane.showMessageDialog(null, "Failed to load Drawer!", "Error!", JOptionPane.ERROR_MESSAGE);
+			System.exit(0); //should we maybe exit nonzero?
+		}
 		EventQueue.invokeLater(new Runnable(){
 			@Override
 			public void run() {
