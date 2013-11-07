@@ -12,6 +12,7 @@ import java.awt.image.*;
 import java.lang.reflect.*;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
 
@@ -102,66 +103,65 @@ public class LouisDrawer extends AbstractDrawer {
 
 	@Override
 	public void drawCrossHair(double x, double y, double radius, double hole) {
-		// TODO Auto-generated method stub
-
+		drawCrossHair(x, y, radius, hole, DEFAULT_FOREGROUND_COLOR);
 	}
 
 	@Override
 	public void drawCrossHair(double x, double y, double radius, double hole, Color c) {
-		// TODO Auto-generated method stub
-
+		for(double i = -radius; i < -hole; ++i) {
+			drawDot(x + i, y, c);
+			drawDot(x, y + i, c);
+		}
+		for(double i = hole + 1; i <= radius; ++i) {
+			drawDot(x + i, y, c);
+			drawDot(x, y + i, c);
+		}
 	}
 
 	@Override
 	public void drawCircle(double ctrX, double ctrY, double radius) {
-		// TODO Auto-generated method stub
-
+		drawCircle(ctrX, ctrY, radius, DEFAULT_FOREGROUND_COLOR);
 	}
 
 	@Override
 	public void drawCircle(double ctrX, double ctrY, double radius, Color c) {
 		// TODO Auto-generated method stub
-
+		JOptionPane.showMessageDialog(null, "Not Implemented: " + Thread.currentThread().getStackTrace()[1].getMethodName());
 	}
 
 	@Override
-	public void fillTriangle(double x1, double y1, double x2, double y2,
-			double x3, double y3) {
-		// TODO Auto-generated method stub
-
+	public void fillTriangle(double x1, double y1, double x2, double y2, double x3, double y3) {
+		fillTriangle(x1, y1, x2, y2, x3, y3, DEFAULT_FOREGROUND_COLOR);
 	}
 
 	@Override
-	public void fillTriangle(double x1, double y1, double x2, double y2,
-			double x3, double y3, Color c) {
+	public void fillTriangle(double x1, double y1, double x2, double y2, double x3, double y3, Color c) {
 		// TODO Auto-generated method stub
-
+		JOptionPane.showMessageDialog(null, "Not Implemented: " + Thread.currentThread().getStackTrace()[1].getMethodName());
 	}
 
 	@Override
-	public void fillTriangleUp(double leftX, double rightX, double leftY,
-			double topX, double topY) {
+	public void fillTriangleUp(double leftX, double rightX, double leftY, double topX, double topY) {
 		// TODO Auto-generated method stub
-
+		JOptionPane.showMessageDialog(null, "Not Implemented: " + Thread.currentThread().getStackTrace()[1].getMethodName());
 	}
 
 	@Override
-	public void fillTriangleDown(double leftX, double rightX, double leftY,
-			double botX, double botY) {
+	public void fillTriangleDown(double leftX, double rightX, double leftY, double botX, double botY) {
 		// TODO Auto-generated method stub
-
+		JOptionPane.showMessageDialog(null, "Not Implemented: " + Thread.currentThread().getStackTrace()[1].getMethodName());
 	}
 
 	@Override
 	public void drawRect(double x1, double y1, double x2, double y2) {
 		// TODO Auto-generated method stub
-
+		JOptionPane.showMessageDialog(null, "Not Implemented: " + Thread.currentThread().getStackTrace()[1].getMethodName());
 	}
 
 	@Override
 	public void drawCube(double x1, double y1, double radius) {
 		// TODO Auto-generated method stub
-
+		JOptionPane.showMessageDialog(null, "Not Implemented: " + Thread.currentThread().getStackTrace()[1].getMethodName());
 	}
 
 }
