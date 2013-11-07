@@ -5,7 +5,6 @@
   <version>0.0.0</version>
   <name>Graphics Programming</name>
   <build>
-    <sourceDirectory>src</sourceDirectory>
     <plugins>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -37,6 +36,12 @@
   		<groupId>net.clonecomputers.lab</groupId>
   		<artifactId>Java-Utility-Library</artifactId>
   		<version>4.0.0</version>
+  	</dependency>
+  	<dependency>
+  		<groupId>junit</groupId>
+  		<artifactId>junit</artifactId>
+  		<version>4.11</version>
+  		<scope>test</scope>
   	</dependency>
   </dependencies>
 </project>
