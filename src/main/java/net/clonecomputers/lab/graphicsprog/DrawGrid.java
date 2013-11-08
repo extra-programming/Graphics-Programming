@@ -53,7 +53,7 @@ public class DrawGrid extends JPanel {
 	}
 	
 	@Override
-	public synchronized void paintComponent(Graphics g) {
+	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.drawImage(canvas, 5, 5, this);
 		g.drawRect(4, 4, canvas.getWidth() + 1, canvas.getHeight() + 1);
