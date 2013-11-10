@@ -8,44 +8,61 @@ public abstract class AbstractDrawer {
 		this.dg = dg;
 	}
 	
+	@ParamaterNames({"x","y"})
 	public abstract void drawDot(double x, double y);
+	@ParamaterNames({"x","y","color"})
 	public final void drawDot(double x, double y, Color c){
 		dg.point(c, new double[]{x, y});
 	}
 	
+	@ParamaterNames({"x1","y1","x2","y2"})
 	public abstract void drawLine(double x1, double y1, double x2, double y2);
+	@ParamaterNames({"x1","y1","x2","y2","color"})
 	public abstract void drawLine(double x1, double y1, double x2, double y2, Color c);
-	
+
+	@ParamaterNames({})
 	public abstract void clear();
+	@ParamaterNames({"color"})
 	public final void clear(Color c){
 		dg.background(c);
 	}
 	
+	@ParamaterNames({"x","y","radius","hole"})
 	public abstract void drawCrossHair(double x, double y, double radius, double hole);
+	@ParamaterNames({"x","y","radius","hole","color"})
 	public abstract void drawCrossHair(double x, double y, double radius,
 			double hole, Color c);
 	
+	@ParamaterNames({"center x","center y","radius"})
 	public abstract void drawCircle(double ctrX, double ctrY, double radius);
+	@ParamaterNames({"center x","center y","radius","color"})
 	public abstract void drawCircle(double ctrX, double ctrY, double radius, Color c);
 	
+	@ParamaterNames({"x","y"})
 	public final Color getDot(double x, double y){
 		return dg.getColor(new int[]{(int)x,(int)y});
 	}
-
+	
+	@ParamaterNames({"x1","y1","x2","y2","x3","y3"})
 	public abstract void fillTriangle(double x1,double y1,
 			double x2,double y2, double x3,double y3);
+	@ParamaterNames({"x1","y1","x2","y2","x3","y3","color"})
 	public abstract void fillTriangle(double x1,double y1,
 			double x2,double y2, double x3,double y3, Color c);
+	@ParamaterNames({"left x","right x","left y","top x","top y"})
 	public abstract void fillTriangleUp(double leftX,double rightX,
 			double leftY,double topX, double topY);
+	@ParamaterNames({"left x","right x","left y","bottom x","bottom y"})
 	public abstract void fillTriangleDown(double leftX,double rightX,
 			double leftY,double botX, double botY);
 	
+	@ParamaterNames({"x1","y1","x2","y2"})
 	public abstract void drawRect(double x1, double y1, double x2, double y2);
 	
+	@ParamaterNames({"x1","y1","radius"})
 	public abstract void drawCube(double x1, double y1, double radius);
 	
-	
+	@ParamaterNames({"x","y"})
 	public void testlines2d( double x, double y ) {
 	//from Miker, API, and David B 
 	    /* Upper right quadrant... */
@@ -77,6 +94,7 @@ public abstract class AbstractDrawer {
 	  drawLine( x+-4,y+0, x+-20,y+0, Color.yellow/*To left of origin*/ );
 	} // testlines2d()
 	
+	@ParamaterNames({})
 	public void testTri() {
 	    fillTriangle (20,0,  40,-10,  30,30,  Color.blue ); 
 	    
@@ -104,7 +122,8 @@ public abstract class AbstractDrawer {
 	    drawDot(rightX,rightY, Color.yellow);
 	    drawDot(botX,botY,Color.red);
 	} // testTri()
-	
+
+	@ParamaterNames({})
 	public void testDg( ) {
 	    // by Zane F , 2006 Apr 28, modified by Mike Roam 2007 Feb 7
 	    fillTriangle (-27,27,  -32,0,  0,32, Color.yellow) ; /* Upper left, with broad face on lower right */
