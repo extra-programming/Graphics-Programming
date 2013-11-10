@@ -6,6 +6,7 @@ import org.mbertoli.jfep.*;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.lang.annotation.*;
 import java.lang.reflect.*;
 import java.util.*;
 import java.util.List;
@@ -119,15 +120,43 @@ public class DrawGridController extends JPanel {
 	}
 
 	public String params(Method m){
-		String s = "";
-		for(Class<?> c: m.getParameterTypes()){
-			s += c.getSimpleName();
-			s += ", ";
+		ParamaterNames names = getAnnotationSuper(m,ParamaterNames.class);
+		if(names != null){
+			StringBuilder s = new StringBuilder("");
+			for(String name: names.value()){
+				s.append(name);
+				s.append(", ");
+			}
+			if(s.length() > 0) return s.substring(0, s.length()-2);
+			return s.toString();
 		}
-		if(s.length() > 0) s = s.substring(0, s.length()-2);
-		return s;
+		StringBuilder s = new StringBuilder("");
+		for(Class<?> c: m.getParameterTypes()){
+			s.append(c.getSimpleName());
+			s.append(", ");
+		}
+		if(s.length() > 0) return s.substring(0, s.length()-2);
+		return s.toString();
 	}
 	
+	private static <T> T getAnnotationSuper(Method m,
+			Class<T> annotationClass) {
+		HashSet<Annotation> annotations = new HashSet<Annotation>();
+		for(Class<?> c = m.getDeclaringClass(); c != null; c = c.getSuperclass()){
+			try {
+				for(Annotation a: c.getMethod(m.getName(), m.getParameterTypes()).getAnnotations()) annotations.add(a);
+			} catch (SecurityException e) {
+				throw new RuntimeException(e);
+			} catch (NoSuchMethodException e) {
+				// expected
+			}
+		}
+		for(Annotation a: annotations){
+			if(annotationClass.isInstance(a)) return annotationClass.cast(a);
+		}
+		return null; // not found
+	}
+
 	public String shortName(Method m){
 		return m.getName();
 	}
