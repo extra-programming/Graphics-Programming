@@ -139,6 +139,7 @@ public class SampleDrawer extends AbstractDrawer {
 		drawCube(x, y, r, .8, PI/6);
 	}
 	
+	@ParamaterNames({"x","y","radius","perspective scalefactor","angle"})
 	public void drawCube(double x, double y, double r, double scale, double angle){
 		double s = scale; // perspective scalefactor
 		double a = angle; // angle
@@ -152,12 +153,14 @@ public class SampleDrawer extends AbstractDrawer {
 		drawLine(x2,y1,x4,y3);
 	}
 	
+	@ParamaterNames({"x1","y1","x2","y2","x3","y3","x4","y4"})
 	public void fillQuadralateral(double x1, double y1, double x2, double y2,
 								  double x3, double y3, double x4, double y4, Color c) {
 		fillTriangle(x1,y1,x2,y2,x3,y3, c);
 		fillTriangle(x1,y1,x4,y4,x3,y3, c);
 	}
 	
+	@ParamaterNames({"x","y","radius","perspective scalefactor","angle"})
 	public void fillCube(double x, double y, double r, double scale, double angle){
 		double s = scale; // perspective scalefactor
 		double a = angle; // angle
