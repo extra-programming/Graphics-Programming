@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 public class DrawGrid extends JPanel {
 	
 	private BufferedImage canvas;
-	private double zoom = 5;
+	private double zoom = 10;
 	
 	private ExecutorService taskExecutor = Executors.newSingleThreadExecutor();
 	
