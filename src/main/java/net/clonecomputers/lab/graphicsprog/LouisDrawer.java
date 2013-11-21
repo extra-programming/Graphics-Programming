@@ -3,6 +3,8 @@ package net.clonecomputers.lab.graphicsprog;
 import static java.lang.Math.abs;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -125,8 +127,17 @@ public class LouisDrawer extends AbstractDrawer {
 
 	@Override
 	public void drawCircle(double ctrX, double ctrY, double radius, Color c) {
-		// TODO Auto-generated method stub
-		JOptionPane.showMessageDialog(null, "Not Implemented: " + Thread.currentThread().getStackTrace()[1].getMethodName());
+		for(double x = 0; x < radius/sqrt(2); ++x) {
+			double y = sqrt(pow(radius, 2) - pow(x, 2));
+			drawDot(ctrX + x, ctrY + y, c);
+			drawDot(ctrX + x, ctrY - y, c);
+			drawDot(ctrX - x, ctrY + y, c);
+			drawDot(ctrX - x, ctrY - y, c);
+			drawDot(ctrX + y, ctrY + x, c);
+			drawDot(ctrX + y, ctrY - x, c);
+			drawDot(ctrX - y, ctrY + x, c);
+			drawDot(ctrX - y, ctrY - x, c);
+		}
 	}
 
 	@Override
