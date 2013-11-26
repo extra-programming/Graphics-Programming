@@ -1,12 +1,10 @@
 package net.clonecomputers.lab.graphicsprog;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.awt.*;
+import java.awt.image.*;
+import java.util.concurrent.*;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 
 @SuppressWarnings("serial")
 public class DrawGrid extends JPanel {
@@ -23,7 +21,11 @@ public class DrawGrid extends JPanel {
 		g.fillRect(0, 0, w, h);
 	}
 	
-	public void point(Color c, double... pos) {
+	public void point(Color c, double x, double y){
+		point(c,new double[]{x,y});
+	}
+	
+	public void point(Color c, double[] pos) {
 		taskExecutor.submit(new DrawTaskRunner(new DrawPointTask(c, pos)));
 	}
 	

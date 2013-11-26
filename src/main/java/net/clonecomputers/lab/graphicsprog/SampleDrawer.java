@@ -72,10 +72,10 @@ public class SampleDrawer extends AbstractDrawer {
 
 	@Override
 	public void drawCircle(double ctrX, double ctrY, double radius, Color c) {
-		for(double theta = 0; theta <= 2*PI*radius; theta++){
+		for(double arcdistance = 0; arcdistance <= 2*PI*radius; arcdistance++){
 			//drawLine(ctrX+radius*cos(theta-1),ctrY+radius*sin(theta-1),
 			//		ctrX+radius*cos(theta),ctrY+radius*sin(theta),c);
-			drawDot(ctrX + (radius*cos(theta/radius)),ctrY + (radius*sin(theta/radius)),c);
+			drawDot(ctrX + (radius*cos(arcdistance/radius)),ctrY + (radius*sin(arcdistance/radius)),c);
 		}
 	}
 
