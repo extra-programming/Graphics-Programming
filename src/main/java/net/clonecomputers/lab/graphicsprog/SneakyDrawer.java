@@ -3,6 +3,7 @@ package net.clonecomputers.lab.graphicsprog;
 import java.awt.*;
 import java.awt.image.*;
 import java.lang.reflect.*;
+import java.util.Arrays;
 
 import javax.swing.*;
 
@@ -61,7 +62,11 @@ public class SneakyDrawer extends AbstractDrawer {
 		DrawGrid dg = getDrawGrid();
 		Method[] ma = DrawGrid.class.getDeclaredMethods();
 		Method xgpMethod = null;
-		for(Method m: ma) if(m.getName().equals("xgp")) xgpMethod = m;
+		for(Method m: ma) if(m.getName().equals("xgp") &&
+				Arrays.equals(m.getParameterTypes(), new Class<?>[]{double.class}) &&
+				m.getReturnType().equals(int.class)){
+			xgpMethod = m;
+		}
 		xgpMethod.setAccessible(true);
 		try {
 			return (Integer) xgpMethod.invoke(dg, x);
@@ -78,7 +83,11 @@ public class SneakyDrawer extends AbstractDrawer {
 		DrawGrid dg = getDrawGrid();
 		Method[] ma = DrawGrid.class.getDeclaredMethods();
 		Method ygpMethod = null;
-		for(Method m: ma) if(m.getName().equals("ygp")) ygpMethod = m;
+		for(Method m: ma) if(m.getName().equals("ygp") &&
+				Arrays.equals(m.getParameterTypes(), new Class<?>[]{double.class}) &&
+				m.getReturnType().equals(int.class)){
+			ygpMethod = m;
+		}
 		ygpMethod.setAccessible(true);
 		try {
 			return (Integer) ygpMethod.invoke(dg, y);
@@ -97,7 +106,7 @@ public class SneakyDrawer extends AbstractDrawer {
 		Field zoomField = null;
 		Field[] dgFields = dgClass.getDeclaredFields();
 		for(Field f: dgFields){
-			if(f.getName().equals("zoom")) zoomField = f;
+			if(f.getName().equals("zoom") && f.getType().equals(double.class)) zoomField = f;
 		}
 		zoomField.setAccessible(true); // THIS is the sneaky part
 		double zoom;
