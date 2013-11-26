@@ -127,7 +127,11 @@ public class LouisDrawer extends AbstractDrawer {
 
 	@Override
 	public void drawCircle(double ctrX, double ctrY, double radius, Color c) {
-		for(double x = 0; x < radius/sqrt(2); ++x) {
+		drawDot(ctrX + radius, ctrY, c);
+		drawDot(ctrX, ctrY + radius, c);
+		drawDot(ctrX - radius, ctrY, c);
+		drawDot(ctrX, ctrY - radius, c);
+		for(double x = 1; x < radius/sqrt(2); ++x) {
 			double y = sqrt(pow(radius, 2) - pow(x, 2));
 			drawDot(ctrX + x, ctrY + y, c);
 			drawDot(ctrX + x, ctrY - y, c);
