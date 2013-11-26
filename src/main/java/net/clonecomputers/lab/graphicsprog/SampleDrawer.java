@@ -1,7 +1,8 @@
 package net.clonecomputers.lab.graphicsprog;
 
-import java.awt.*;
 import static java.lang.Math.*;
+
+import java.awt.*;
 
 public class SampleDrawer extends AbstractDrawer {
 
@@ -72,7 +73,7 @@ public class SampleDrawer extends AbstractDrawer {
 
 	@Override
 	public void drawCircle(double ctrX, double ctrY, double radius, Color c) {
-		for(double arcdistance = 0; arcdistance <= 2*PI*radius; arcdistance++){
+		for(double arcdistance = 0; arcdistance <= 2*PI*radius; arcdistance+=(radius*PI/4)/((int)radius*PI/4)){
 			//drawLine(ctrX+radius*cos(theta-1),ctrY+radius*sin(theta-1),
 			//		ctrX+radius*cos(theta),ctrY+radius*sin(theta),c);
 			drawDot(ctrX + (radius*cos(arcdistance/radius)),ctrY + (radius*sin(arcdistance/radius)),c);
@@ -168,8 +169,16 @@ public class SampleDrawer extends AbstractDrawer {
 		double x3=x+r*(2*cos(a)+1)*s,x4=x+r*(2*cos(a)-1)*s,y3=y+r*(2*sin(a)+1)*s,y4=y+r*(2*sin(a)-1)*s;
 		
 		fillQuadralateral(x1, y1, x1, y2, x2, y2, x2, y1, Color.RED);
-		fillQuadralateral(x1, y1, x3, y3, x4, y3, x2, y1, Color.GREEN);
-		fillQuadralateral(x1, y1, x3, y3, x3, y4, x1, y2, Color.BLUE);
+		if(sin(angle) > 0) {
+			fillQuadralateral(x1, y1, x3, y3, x4, y3, x2, y1, Color.GREEN);
+		} else {
+			fillQuadralateral(x2, y2, x4, y4, x3, y4, x1, y2, Color.GREEN);
+		}
+		if(cos(angle) > 0) {
+			fillQuadralateral(x1, y1, x3, y3, x3, y4, x1, y2, Color.BLUE);
+		} else {
+			fillQuadralateral(x2, y2, x4, y4, x4, y3, x2, y1, Color.BLUE);
+		}
 	}
 
 	@Override
